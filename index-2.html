@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal 21 — Premium Blackjack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&family=Oswald:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="ambient-bg">
+  <div class="ambient-orb orb1"></div>
+  <div class="ambient-orb orb2"></div>
+  <div class="ambient-orb orb3"></div>
+</div>
+
+<!-- TOP HUD -->
+<header id="top-hud">
+  <div class="hud-brand">
+    <span class="brand-icon">♠</span>
+    <span class="brand-name">ROYAL 21</span>
+    <span class="brand-icon">♠</span>
+  </div>
+  <div class="hud-stats">
+    <div class="stat-pill">
+      <span class="stat-label">HANDS</span>
+      <span class="stat-val" id="s-hands">0</span>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-label">WIN RATE</span>
+      <span class="stat-val" id="s-rate">—</span>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-label">BIGGEST WIN</span>
+      <span class="stat-val gold" id="s-best">—</span>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-label">LAST RESULT</span>
+      <span class="stat-val" id="s-last">—</span>
+    </div>
+  </div>
+  <button id="btn-rebuy" class="rebuy-btn">+ $100K</button>
+</header>
+
+<!-- MAIN TABLE -->
+<main id="table-wrap">
+  <div id="table-felt">
+    <div class="table-inner-ring"></div>
+
+    <!-- DEALER ZONE -->
+    <section id="dealer-zone">
+      <div class="zone-label">DEALER</div>
+      <div id="dealer-cards" class="cards-area"></div>
+      <div id="dealer-score-badge" class="score-badge hidden">0</div>
+    </section>
+
+    <!-- CENTER DIVIDER -->
+    <div id="table-center">
+      <div id="result-display" class="result-display hidden"></div>
+      <div class="center-logo">
+        <span>♦</span><span>BLACKJACK PAYS 3:2</span><span>♦</span>
+      </div>
+    </div>
+
+    <!-- PLAYER ZONE -->
+    <section id="player-zone">
+      <div id="player-hands-wrap" class="hands-wrap"></div>
+    </section>
+  </div>
+</main>
+
+<!-- BOTTOM CONTROLS -->
+<footer id="controls-wrap">
+
+  <!-- BALANCE BAR -->
+  <div id="balance-bar">
+    <div class="balance-item">
+      <div class="balance-label">BALANCE</div>
+      <div class="balance-amount" id="balance-display">$100,000</div>
+    </div>
+    <div class="balance-divider"></div>
+    <div class="balance-item bet-center">
+      <div class="balance-label">CURRENT BET</div>
+      <div class="balance-amount gold pulse-on-bet" id="bet-display">$0</div>
+    </div>
+    <div class="balance-divider"></div>
+    <div class="balance-item">
+      <div class="balance-label">NET P/L</div>
+      <div class="balance-amount" id="pl-display">$0</div>
+    </div>
+  </div>
+
+  <!-- CHIPS + CUSTOM BET -->
+  <div id="chip-section">
+    <div id="chips-row">
+      <div class="chip" data-val="100">
+        <div class="chip-inner">
+          <div class="chip-edge"></div>
+          <div class="chip-face">
+            <div class="chip-ring"></div>
+            <div class="chip-center">
+              <span class="chip-denom">$100</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chip" data-val="500">
+        <div class="chip-inner">
+          <div class="chip-edge"></div>
+          <div class="chip-face">
+            <div class="chip-ring"></div>
+            <div class="chip-center">
+              <span class="chip-denom">$500</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chip" data-val="1000">
+        <div class="chip-inner">
+          <div class="chip-edge"></div>
+          <div class="chip-face">
+            <div class="chip-ring"></div>
+            <div class="chip-center">
+              <span class="chip-denom">$1K</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chip" data-val="5000">
+        <div class="chip-inner">
+          <div class="chip-edge"></div>
+          <div class="chip-face">
+            <div class="chip-ring"></div>
+            <div class="chip-center">
+              <span class="chip-denom">$5K</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chip" data-val="25000">
+        <div class="chip-inner">
+          <div class="chip-edge"></div>
+          <div class="chip-face">
+            <div class="chip-ring"></div>
+            <div class="chip-center">
+              <span class="chip-denom">$25K</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chip" data-val="100000">
+        <div class="chip-inner">
+          <div class="chip-edge"></div>
+          <div class="chip-face">
+            <div class="chip-ring"></div>
+            <div class="chip-center">
+              <span class="chip-denom">$100K</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chip" data-val="1000000">
+        <div class="chip-inner">
+          <div class="chip-edge"></div>
+          <div class="chip-face">
+            <div class="chip-ring"></div>
+            <div class="chip-center">
+              <span class="chip-denom">$1M</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="custom-bet-row">
+      <input type="number" id="bet-manual" class="custom-bet-input" placeholder="Custom amount..." min="1">
+      <button class="custom-add-btn" id="btn-manual-add">ADD</button>
+      <button class="clear-btn" id="btn-clear-bet">CLEAR</button>
+    </div>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div id="action-row">
+    <button class="action-btn btn-deal" id="btn-deal">
+      <span class="btn-icon">◆</span> DEAL
+    </button>
+    <button class="action-btn btn-hit" id="btn-hit" style="display:none">
+      <span class="btn-icon">+</span> HIT
+    </button>
+    <button class="action-btn btn-stand" id="btn-stand" style="display:none">
+      <span class="btn-icon">✋</span> STAND
+    </button>
+    <button class="action-btn btn-double" id="btn-double" style="display:none">
+      <span class="btn-icon">2×</span> DOUBLE
+    </button>
+    <button class="action-btn btn-split" id="btn-split" style="display:none">
+      <span class="btn-icon">⇌</span> SPLIT
+    </button>
+    <button class="action-btn btn-insurance" id="btn-insurance" style="display:none">
+      <span class="btn-icon">🛡</span> INSURANCE
+    </button>
+    <button class="action-btn btn-next" id="btn-next" style="display:none">
+      <span class="btn-icon">▶</span> NEXT HAND
+    </button>
+  </div>
+</footer>
+
+<script src="game.js"></script>
+</body>
+</html>
